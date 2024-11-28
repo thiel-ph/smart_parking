@@ -1,0 +1,27 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Compiled source code
+*.class
+*.pyc
+*.o
+*.so
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Dependency directories
+node_modules/
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+
+# Environment variables
+.env
