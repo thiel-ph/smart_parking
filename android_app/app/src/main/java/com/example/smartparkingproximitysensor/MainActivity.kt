@@ -38,13 +38,13 @@ class MainActivity : AppCompatActivity() {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
         override fun onSensorChanged(event: SensorEvent) {
-            val isOccupied = event.values[0] < proximitySensor!!.maximumRange // Close object detected
+            val isOccupied = event.values[0] < proximitySensor!!.maximumRange
             sendAvailabilityStatusToApi(isOccupied)
         }
     }
 
     private fun sendAvailabilityStatusToApi(isOccupied: Boolean) {
-        val url = "http://52.53.253.65:5000/parking/status" // Replace with your actual API URL
+        val url = "http://52.53.253.65:5000/parking/status" 
         val jsonBody = JSONObject().apply {
             put("isOccupied", isOccupied)
         }

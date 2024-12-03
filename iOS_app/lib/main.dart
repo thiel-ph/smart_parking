@@ -13,9 +13,9 @@ class ParkingLots {
 
   ParkingLots({
     required this.name,
-    this.distance = 0.0, // Default value for distance
-    this.isGreyedOut = false, // Default value for isGreyedOut
-    this.capacity = 50, // Default value for capacity
+    this.distance = 0.0,
+    this.isGreyedOut = false,
+    this.capacity = 50,
     this.available = 0,
   });
 }
@@ -65,7 +65,7 @@ class _MyListPageState extends State<MyListPage> {
   @override
   void initState() {
     super.initState();
-    fetchData(); // Initial fetch
+    fetchData();
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       fetchData();
     });
@@ -86,7 +86,6 @@ class _MyListPageState extends State<MyListPage> {
         bool isOccupied = data['isOccupied'];
 
         setState(() {
-          // Update the availability of "Fourth Street Garage"
           allParkingLots
               .firstWhere(
                   (lot) => lot.name == 'Fourth Street Garage (44 S. 4th St.)')
@@ -102,17 +101,14 @@ class _MyListPageState extends State<MyListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Sort the list by the `value` attribute
     allParkingLots.sort((a, b) {
-      // First, prioritize lots with available slots
       if ((a.available > 0) && (b.available == 0)) {
-        return -1; // a comes before b
+        return -1;
       }
       if ((a.available == 0) && (b.available > 0)) {
-        return 1; // b comes before a
+        return 1;
       }
 
-      // If both have the same availability status, sort by distance
       return a.distance.compareTo(b.distance);
     });
 
@@ -120,20 +116,19 @@ class _MyListPageState extends State<MyListPage> {
       body: Column(
         children: [
           SafeArea(
-            child: Image.asset('images/smart_parking_logo.png'), // The picture
+            child: Image.asset('images/smart_parking_logo.png'),
           ),
           Text(
             "Find nearby parking spaces:",
             style: TextStyle(
-              fontSize: 20, // Larger font size
-              fontWeight: FontWeight.bold, // Bold text
-              color: Colors.black, // Text color
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
           Expanded(
             child: Stack(
               children: [
-                // List of items
                 ListView.builder(
                   itemCount: allParkingLots.length,
                   itemBuilder: (context, index) {
@@ -141,8 +136,8 @@ class _MyListPageState extends State<MyListPage> {
                     final isClickable = item.available > 0;
                     return AnimatedContainer(
                       duration:
-                          Duration(milliseconds: 500), // Smooth transition
-                      curve: Curves.easeInOut, // Smooth easing
+                          Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
                       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -182,11 +177,11 @@ class _MyListPageState extends State<MyListPage> {
                 ),
                 // Gradient overlay
                 Positioned(
-                  top: 0, // Align to the top
+                  top: 0, 
                   left: 0,
                   right: 0,
                   child: Container(
-                    height: 70, // Adjust height as needed
+                    height: 70,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -238,7 +233,7 @@ class DetailPage extends StatelessWidget {
           children: [
             SafeArea(
               child:
-                  Image.asset('images/fourth_street_garage.png'), // The picture
+                  Image.asset('images/fourth_street_garage.png'),
             ),
             SizedBox(height: 16), // Spacer
             Text(
