@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class ParkingLots {
   final String name;
@@ -29,7 +30,7 @@ class _MyListPageState extends State<MyListPage> {
   final List<ParkingLots> allParkingLots = [
     ParkingLots(
         name: 'Fourth Street Garage (44 S. 4th St.)',
-        distance: 0.7,
+        distance: 0.4,
         isGreyedOut: false,
         available: 0,
         capacity: 40),
@@ -232,10 +233,39 @@ class DetailPage extends StatelessWidget {
         title: Text(item.name),
       ),
       body: Center(
-        child: Text(
-          'Details for ${item.name}\nValue: ${item.distance}',
-          style: TextStyle(fontSize: 20),
-          textAlign: TextAlign.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SafeArea(
+              child:
+                  Image.asset('images/fourth_street_garage.png'), // The picture
+            ),
+            SizedBox(height: 16), // Spacer
+            Text(
+              'Distance: ${item.distance} miles',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 8), // Spacer
+            Text(
+              'Availability: ${item.available}/${item.capacity}',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 24), // Spacer
+            ElevatedButton(
+              onPressed: () async {
+                final Uri url =
+                    Uri.parse('https://maps.app.goo.gl/BuhTULRUN93wj2iK8');
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not open the URL')),
+                  );
+                }
+              },
+              child: Text('Get direction'),
+            ),
+          ],
         ),
       ),
     );
