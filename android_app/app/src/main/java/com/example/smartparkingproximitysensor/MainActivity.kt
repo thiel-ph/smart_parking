@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize SensorManager and Proximity Sensor
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
 
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // SensorEventListener to monitor proximity changes
     private val proximitySensorListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
